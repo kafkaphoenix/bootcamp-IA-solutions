@@ -8,7 +8,7 @@ import spacy
 import spacy_spanish_lemmatizer
 
 nltk.download("stopwords")
-nltk.download("punkt")
+nltk.download("punkt_tab")
 
 
 def clean_query_txt(query: str) -> str:
@@ -18,29 +18,26 @@ def clean_query_txt(query: str) -> str:
     return query
 
 def clean_query_txt_v2(query: str) -> str:
-    # remove irrelevant phrases
+    # remove irrelevant phrases and extra spaces
     query = query.replace("El usuario busca ", "").strip()
 
     # # convert to lowercase
-    # text = text.lower()
+    query = query.lower()
 
     # # # Remove special characters, numbers, punctuations (except for apostrophes)
-    # text = re.sub(r"[^a-zA-Z']", ' ', text)
-    
-    # # remove extra spaces
-    # text = re.sub(r'\s+', ' ', text).strip()
+    # query = re.sub(r"[^a-zA-Z']", ' ', query)
     
     # # Remove stop words (Stop words are common words that do not add much meaning to a sentence, such as "yo", "para mí", etc.)
     # stop_words = set(stopwords.words('spanish'))
-    # text_tokens = nltk.word_tokenize(text, language='spanish')
-    # filtered_words = [word for word in text_tokens if word not in stop_words]
-    # text = ' '.join(filtered_words)
+    # query_tokens = nltk.word_tokenize(query, language='spanish')
+    # filtered_words = [word for word in query_tokens if word not in stop_words]
+    # query = ' '.join(filtered_words)
 
     # # lemmatization
     # nlp = spacy.load("es_core_news_sm")
     # nlp.replace_pipe("lemmatizer", "spanish_lemmatizer")
-    # doc = nlp(text)
+    # doc = nlp(query)
     # lemmatized_words = [token.lemma_ for token in doc]
-    # text = ' '.join(lemmatized_words)
+    # query = ' '.join(lemmatized_words)
 
     return query

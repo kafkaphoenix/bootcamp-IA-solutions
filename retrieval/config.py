@@ -3,8 +3,8 @@ from __future__ import annotations
 from typing import Callable
 
 from data_utils import Movie
-from retrieval.indexing_pipeline_utils import get_synopsys_txt
-from retrieval.retrieval_pipeline_utils import clean_query_txt
+from retrieval.indexing_pipeline_utils import get_synopsys_txt, process_movie_info
+from retrieval.retrieval_pipeline_utils import clean_query_txt, clean_query_txt_v2
 
 
 class RetrievalExpsConfig:
@@ -24,13 +24,15 @@ class RetrievalExpsConfig:
         # Parámetros para la generación de embeddings
 
         # all-MiniLM-L6-v2 model (384 vector size) is lightweight and performs well for huge datasets but it has lower accuracy on complex queries
-        # other options would be all-mpnet-base-v2 (768 vector size) also from SentenceTransformers, but 5x slower
+        # all-mpnet-base-v2 (768 vector size) also from SentenceTransformers, but 5x slower
+        # all-MiniLM-L12-v2 (384 vector size) a bit more accurate than MiniLM-L6-v2 and still fast
         # LaBSE (768 vector size) for multilingual reviews, but much slower
-        # and OpenAI models (1536 and 3072 vector sizes depending on the model) for best performance but incurring in costs
-        self.model_name: str = "all-MiniLM-L6-v2"
+        # OpenAI models (1536 and 3072 vector sizes depending on the model) for best performance but incurring in costs
+        # intfloat/e5-large-v2 (1024 vector size) is a good trade-off between performance and speed/costs
+        self.model_name: str = "intfloat/e5-large-v2"
         self.normalize_embeddings: bool = False  # Normalizar los embeddings a longitud 1 antes de indexarlos
 
-        self._query_prepro_fn: Callable = clean_query_txt
+        self._query_prepro_fn: Callable = clean_query_txt_v2
 
     ## NO MODIFICAR A PARTIR DE AQUÍ ##
 

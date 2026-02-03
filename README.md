@@ -44,28 +44,14 @@ Results can be seen in the mlflow UI at `http://localhost:8080/#/experiments`
 > Lemmatization rules requires executing `uv run python -m spacy_spanish_lemmatizer download wiki` and `uv run python -m spacy download es_core_news_sm` before running the project for the first time.
 
 ## Results
-- First try is using the embedding model `all-mpnet-base-v2` and default preprocessing.
+- First try was using the default embedding model `all-MiniLM-L6-v2` and default preprocessing. Relevant movie found at the top 10 is 23.7%  and mmr10 is 0.163.
 
-![results/default_rank_distribution.png](results/default_rank_distribution.png)
+- Second try was using the embedding model `all-mpnet-base-v2`. Relevant movie found at the top 10 is 24.3% and mmr10 is 0.162.
 
-![results/default_metrics.png](results/default_metrics.png)
+- Third try was using the embedding model `all-MiniLM-L12-v2`. Relevant movie found at the top 10 is 29.7% and mmr10 is 0.185.
 
-> It returns a mmr10 of 0.16 which is really low due to the lack of preprocessing for Spanish queries and the information returned of the movies being quite limited (only overview). And we can see in the rank distribution thatonly 24.30 % of the relevant documents are found in the top 10 results.
+- Fourth try was using the embedding model `all-MiniLM-L12-v2` and enabling normalization of embeddings. It stays the same: Relevant movie found at the top 10 is 29.7% and mmr10 is 0.185.
 
-- Second try is using the embedding model `all-mpnet-base-v2` and the new preprocessing for Spanish queries.
+- Fifth try was using the embedding model `all-MiniLM-L12-v2` and the new preprocessing function `clean_query_txt_v2`. Because the query follows always the same pattern, it doesn't seem to be helpful. Lemmatization, removing stop words made the results slightly worse and removing special characters way worse, lower case didn't have any effect. Relevant movie found at the top 10 is 29.7% and mmr10 is 0.185.
 
-![results/new_rank_distribution.png](results/metrics_nltk_spacy_extra_info_film_rank_distribution.png)
-
-![results/new_metrics.png](results/metrics_nltk_spacy_extra_info_film_metrics.png)
-
-> It returns a mmr10 of 0.078 and rank distribution of 18.7 % of relevant documents found in the top 10 results. The performance has decreased a bit, probably due to the fact that the embedding model is not fine-tuned for Spanish and the information added for each movie is not very relevant (mainly genres and release date).
-
-- Third try is like the previous one but not doing lemmatization in the preprocessing. It increases the mmr10 from 0.078 to 0.086 and rank distribution from 18.7 % to 19%. Moving from the custom spanish lemmatizer to spacy default one didn't improve the results either (similar to second try). So we will disable lemmatization in the preprocessing.
-
-- Fourth try is using the same model but removing also stop words in Spanish. It keeps the same mmr10 of 0.086 but decreases the rank distribution from 19% to 16.7%. So we will keep stop words in the preprocessing.
-
-- Fifth try is using the same model but going back to only synposis as movie information. It keeps the same mmr10 of 0.086 and rank distribution. So the reason we lost mmr10 since the first try is mainly due to the preprocessing for Spanish queries.
-
-- Sixth try is using the same model but commenting out special characters removal in the preprocessing. It increases the mmr10 from 0.086 to 0.116 and rank distribution from 19% to 20.7%. Commenting out space removal or not lowering the query didn't change the results. So we will keep special characters in the preprocessing.
-
-- Seventh try is using the same model but not lowercasing the text in the preprocessing. It decreases the mmr10 from 0.116 to 0.105 but increases rank distribution from 20.7% to 22%. So we will keep lowercasing in the preprocessing.
+- Sixth try was using the embedding model `intfloat/e5-large-v2`. Relevant movie found at the top 10 is 37% and mmr10 is 0.246.
