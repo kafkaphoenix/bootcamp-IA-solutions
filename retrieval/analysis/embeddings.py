@@ -1,6 +1,7 @@
 # %%
 import sys
 from pathlib import Path
+import os
 # Sort out paths for proper imports
 root_dir = Path(__file__).parents[2]
 sys.path.append(str(root_dir))
@@ -41,7 +42,9 @@ unique_genres
 genre_embeddings = embedder.embed_documents(list(unique_genres))
 genre_embeddings = np.array(genre_embeddings)
 
-# Reduce dimensionality
+# Reduce dimensionality from high-dim
+# (768 vector size from Sentence Transformers
+# default model in the config file) to 2D for visualization
 # %%
 import umap
 import matplotlib.pyplot as plt

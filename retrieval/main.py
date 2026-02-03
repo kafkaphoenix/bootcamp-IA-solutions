@@ -62,10 +62,12 @@ def generate_index_pipeline(config: RetrievalExpsConfig, logger: logging.Logger)
     t0 = time.time()
     embedder = load_embedder(config)
     movie_ids = [doc.metadata["movie_id"] for doc in movies_as_docs]
+    # FAISS crea un índice de vectores a partir de los documentos y el embedder
+    # We are using the CPU version
     index = FAISS.from_documents(movies_as_docs, embedder, ids=movie_ids)
 
     # Guardamos el índice en local
-    path_to_save_index = CACHE_PATH / f"faiss_{exp_config.index_config_unique_id}"
+    path_to_save_index = CACHE_PATH / f"faiss_{config.index_config_unique_id}"
     path_to_save_index.mkdir(parents=True, exist_ok=True)
     index.save_local(path_to_save_index)
     t_elapsed = time.time() - t0

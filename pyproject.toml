@@ -1,0 +1,30 @@
+[project]
+name = "bootcamp-ia-solutions"
+version = "0.1.0"
+description = "RAG solutions for the IA Bootcamp"
+readme = "README.md"
+requires-python = "~=3.13"
+dependencies = [
+    "colorlog==6.10.1", # For colored logging output
+    "dotenv==0.9.9", # To load environment variables from .env files
+    "faiss-cpu==1.13.2", # Facebook AI Similarity Search library. Vector database
+    "huggingface-hub==1.3.7", # For accessing Hugging Face model hub
+    "ipykernel==7.1.0", # Jupyter kernel for interactive computing
+    "langchain-community==0.4.1", # Community extensions for LangChain
+    "langchain-core==1.2.8", # Core LangChain library
+    "matplotlib==3.10.8", # Plotting library
+    "mlflow==3.9.0", # For managing machine learning experiments
+    "numpy==2.2", # Numerical computing library
+    "psycopg[binary]==3.3.2", # PostgreSQL adapter
+    "requests==2.32.5", # For making HTTP requests
+    "seaborn==0.13.2", # Statistical data visualization
+    "sentence-transformers==5.2.2", # For sentence embeddings.
+    "tokenizers==0.22.2", # Fast tokenization library
+    "torch==2.10.0", # PyTorch deep learning framework
+    "tqdm==4.67.2", # Progress bar library
+    "transformers==5.0.0", # Hugging Face Transformers library
+    "umap-learn==0.64", # Fork to support python 3.13. It's for dimensionality reduction
+]
+
+[tool.uv.sources]
+umap-learn = { git = "https://github.com/kafkaphoenix/umap.git" }
