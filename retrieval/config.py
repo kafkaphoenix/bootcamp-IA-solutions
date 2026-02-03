@@ -27,7 +27,7 @@ class RetrievalExpsConfig:
         # other options would be all-mpnet-base-v2 (768 vector size) also from SentenceTransformers, but 5x slower
         # LaBSE (768 vector size) for multilingual reviews, but much slower
         # and OpenAI models (1536 and 3072 vector sizes depending on the model) for best performance but incurring in costs
-        self.model_name: str = "all-mpnet-base-v2"
+        self.model_name: str = "all-MiniLM-L6-v2"
         self.normalize_embeddings: bool = False  # Normalizar los embeddings a longitud 1 antes de indexarlos
 
         self._query_prepro_fn: Callable = clean_query_txt

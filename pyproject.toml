@@ -14,11 +14,15 @@ dependencies = [
     "langchain-core==1.2.8", # Core LangChain library
     "matplotlib==3.10.8", # Plotting library
     "mlflow==3.9.0", # For managing machine learning experiments
+    "nltk==3.9.2", # Natural Language Toolkit
     "numpy==2.2", # Numerical computing library
+    "pip==26.0", # For downloading spacy es_core_news_sm model
     "psycopg[binary]==3.3.2", # PostgreSQL adapter
     "requests==2.32.5", # For making HTTP requests
     "seaborn==0.13.2", # Statistical data visualization
     "sentence-transformers==5.2.2", # For sentence embeddings.
+    "spacy==3.8.11", # NLP library to handle Spanish lemmatization
+    "spacy-spanish-lemmatizer==0.7", # Spanish lemmatization support for spaCy
     "tokenizers==0.22.2", # Fast tokenization library
     "torch==2.10.0", # PyTorch deep learning framework
     "tqdm==4.67.2", # Progress bar library

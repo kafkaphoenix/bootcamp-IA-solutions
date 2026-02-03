@@ -135,8 +135,8 @@ if __name__ == "__main__":
 
         # Evaluamos el pipeline de generación de índice y el de retrieval
         eval_queries = load_eval_queries()
-        logger.info(f"Evaluando el modelo de retieval con {len(eval_queries):,} queries...")
-        logger.info(f"Cargando el índice con los embeddings..")
+        logger.info(f"Evaluando el modelo de retrieval con {len(eval_queries):,} queries...")
+        logger.info("Cargando el índice con los embeddings..")
         embedder = load_embedder(exp_config)
         embedder.show_progress = False
         index = FAISS.load_local(
