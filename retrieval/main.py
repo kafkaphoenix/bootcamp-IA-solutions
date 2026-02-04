@@ -88,7 +88,9 @@ def retrieval_pipeline(
     if verbose:
         logger.info(f"Recuperando documentos similares a la query {query}...")
     t = time.time()
+    # preprocessing
     query_txt = config.query_prepro_fn(query)
+    # retrieval from feature store FAISS index
     retrieved_docs = index.similarity_search(query_txt, k=10)
     t_elapsed = time.time() - t
     if verbose:
