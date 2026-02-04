@@ -55,3 +55,13 @@ Results can be seen in the mlflow UI at `http://localhost:8080/#/experiments`
 - Fifth try was using the embedding model `all-MiniLM-L12-v2` and the new preprocessing function `clean_query_txt_v2`. Because the query follows always the same pattern, it doesn't seem to be helpful. Lemmatization, removing stop words made the results slightly worse and removing special characters way worse, lower case didn't have any effect. Relevant movie found at the top 10 is 29.7% and mmr10 is 0.185.
 
 - Sixth try was using the embedding model `intfloat/e5-large-v2`. Relevant movie found at the top 10 is 37% and mmr10 is 0.246.
+
+- Seventh try was using the embedding model `paraphrase-multilingual-MiniLM-L12-v2`. Relevant movie found at the top 10 is 36.3% and mmr10 is 0.223. 4X faster than e5-large-v2.
+
+- Eighth try was using the embedding model `bertin-project/bertin-roberta-base-spanish`. The results were really bad 5.7% relevant at top 10 and mmr10 0.037. The model seems not suitable for the task.
+
+- Ninth try was using the embedding model `jaimevera1107/all-MiniLM-L6-v2-similarity-es`. Relevant movie found at the top 10 is 26% and mmr10 is 0.194. A bit better than the original all-MiniLM-L6-v2 but still far from the best ones.
+
+- Tenth try was using the embedding model `hiiamsid/sentence_similarity_spanish_es`. Relevant movie found at the top 10 is 52.7% and mmr10 is 0.37.
+
+- Eleventh try was using the embedding model `Shaharyar6/finetuned_sentence_similarity_spanish`. Relevant movie found at the top 10 is 57.3% and mmr10 is 0.393. This is the best model so far, times are similar to the previous one.

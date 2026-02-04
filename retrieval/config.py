@@ -19,17 +19,24 @@ class RetrievalExpsConfig:
     def __init__(self):
 
         # Función a emplear para generar el texto a indexar con embeddings; Debe tomar como input un objeto `Movie` y devolver un string
-        self._text_to_embed_fn: Callable = get_synopsys_txt
+        self._text_to_embed_fn: Callable = process_movie_info
 
         # Parámetros para la generación de embeddings
 
         # all-MiniLM-L6-v2 model (384 vector size) is lightweight and performs well for huge datasets but it has lower accuracy on complex queries
+        # doesn't understand Spanish!
         # all-mpnet-base-v2 (768 vector size) also from SentenceTransformers, but 5x slower
+        # doesn't understand Spanish!
         # all-MiniLM-L12-v2 (384 vector size) a bit more accurate than MiniLM-L6-v2 and still fast
+        # doesn't understand Spanish!
         # LaBSE (768 vector size) for multilingual reviews, but much slower
         # OpenAI models (1536 and 3072 vector sizes depending on the model) for best performance but incurring in costs
         # intfloat/e5-large-v2 (1024 vector size) is a good trade-off between performance and speed/costs
-        self.model_name: str = "intfloat/e5-large-v2"
+        # doesn't understand Spanish!
+        # intfloat/multilingual-e5-large-instruct (1024 vector size) better for multilingual
+        # paraphrase-multilingual-MiniLM-L12-v2 (384 vector size) lightweight and multilingual, but lower accuracy
+        # Shaharyar6/finetuned_sentence_similarity_spanish (768 vector size) better accuracy for Spanish
+        self.model_name: str = "Shaharyar6/finetuned_sentence_similarity_spanish"
         self.normalize_embeddings: bool = False  # Normalizar los embeddings a longitud 1 antes de indexarlos
 
         self._query_prepro_fn: Callable = clean_query_txt_v2

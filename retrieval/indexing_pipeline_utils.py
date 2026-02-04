@@ -28,5 +28,5 @@ def get_synopsys_txt(movie: Movie) -> str:
     return movie.synopsis
 
 def process_movie_info(movie: Movie) -> str:
-    info =  f"{movie.title_es}. Dirigida por {movie.director_top_5}. Protagonizada por {', '.join(movie.cast_top_5)}. Género: {movie.genre_tags}. Sinopsis: {movie.synopsis}. Año: {movie.year}. País: {movie.country}. Duración: {movie.duration_mins} minutos. Es serie de TV: {'Sí' if movie.tv_show_flag else 'No'}."
-    return info
+    cleaned_synopsis = movie.synopsis.replace("(FILMAFFINITY)", "")
+    return f"{movie.title_es}; {cleaned_synopsis}; {movie.genre_tags}"
